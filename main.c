@@ -4,30 +4,35 @@
 #include "gamelib.h"
 
 int main(){
-	int d;
+	int scelta,termina=0;
 	time_t t;
 	srand((unsigned)time(&t));
-	insI();
-
-	printf("***Benvenuto in SABBIE***\n");
-
+	printf("===SABBIE===\n");
 	do {
-		printf("\n1)Crea cunicoli 2)Gioca 3)Esci\n*Qualsiasi altro tasto ti fara' uscire*\n");
-		scanf("%d",&d);
-		clean_stdin();
-		switch (d) {
-			case 1:
-				crea_cunicoli();
-				break;
-			case 2:
-				gioca();
-				break;
-			case 3:
-				uscita_programma();
-				break;
-			default:
-			uscita_programma();
-			break;
+		printf("1)Crea cunicoli \n2)Cancella cunicoli \n3)Gioca \n4)Esci\n*Qualsiasi altro comando non è valido*\n");
+		if(scanf("%d",&scelta)==0){
+			printf("Hai inserito un carattere invece che un numero, gioco interroto,riavviare\n");
+			termina=1;
 		}
-	} while(1);
+		else{
+			switch (scelta) {
+				case 1:
+					crea_cunicoli();
+					break;
+				case 2:
+					cancella_cunicoli();
+					break;
+				case 3:
+					gioca();
+					break;
+				case 4:
+					termina_gioco();
+					termina=1;
+					break;
+				default:
+					printf("Comando non valido\n");		
+					break;
+			}
+		}
+	} while(termina==0);
 }
